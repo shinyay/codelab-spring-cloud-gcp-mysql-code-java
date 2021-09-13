@@ -1,6 +1,6 @@
-# Name
+# Getting Started with Spring Cloud GCP for Cloud SQL - MySQL
 
-Overview
+This is a tutorial project with Test Codes.
 
 ## Description
 
