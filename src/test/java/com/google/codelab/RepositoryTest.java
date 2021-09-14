@@ -28,5 +28,13 @@ public class RepositoryTest {
             .withUsername("scott")
             .withPassword("tiger");
 
+    @DynamicPropertySource
+    static void mySqlProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
+        registry.add("spring.datasource.username", mySQLContainer::getUsername);
+        registry.add("spring.datasource.password", mySQLContainer::getPassword);
+        registry.add("spring.jpa.hibernate.ddl-auto", ()->"create-drop");
+    }
+
 
 }
