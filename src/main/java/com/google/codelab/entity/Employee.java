@@ -9,6 +9,26 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employee_id;
 
+    private String name;
+    
+    private String role;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setEmployee_id(Long employee_id) {
         this.employee_id = employee_id;
     }
