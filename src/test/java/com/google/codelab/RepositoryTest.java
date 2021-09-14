@@ -36,5 +36,9 @@ public class RepositoryTest {
         registry.add("spring.jpa.hibernate.ddl-auto", ()->"create-drop");
     }
 
-
+    @Test
+    public void findAllEmployees() {
+        List<Employee> result = repository.findAll();
+        org.assertj.core.api.Assertions.assertThat(result.stream().count()).isEqualTo(0);
+    }
 }
