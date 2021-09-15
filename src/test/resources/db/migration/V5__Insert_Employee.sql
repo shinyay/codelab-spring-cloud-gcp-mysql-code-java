@@ -1,0 +1,1 @@
+INSERT INTO employee VALUES (1, 100, 'shinyay', 'Tester');
