@@ -14,6 +14,8 @@ public class Employee {
 
     private String role;
 
+    private Long department_id;
+
     public String getName() {
         return name;
     }
@@ -36,5 +38,13 @@ public class Employee {
 
     public Long getEmployee_id() {
         return employee_id;
+    }
+
+    public Long getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(Long department_id) {
+        this.department_id = department_id;
     }
 }
