@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Department {
     @Id
     @GeneratedValue
+    @Column(name = "department_id", nullable = false)
     private Long id;
 
     public void setId(Long id) {
