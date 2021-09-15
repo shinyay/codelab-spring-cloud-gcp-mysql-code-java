@@ -9,6 +9,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employee_id;
 
+    @Column(name = "employee_name", nullable = false, length = 64)
     private String name;
 
     private String role;
