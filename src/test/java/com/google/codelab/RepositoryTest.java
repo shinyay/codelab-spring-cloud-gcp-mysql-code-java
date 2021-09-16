@@ -2,6 +2,7 @@ package com.google.codelab;
 
 import com.google.codelab.entity.Employee;
 import com.google.codelab.repository.EmployeeRepository;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,6 +14,10 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @Testcontainers
 @DataJpaTest
@@ -38,8 +43,11 @@ public class RepositoryTest {
     }
 
     @Test
+    @Order(1)
     public void findAllEmployees() {
         List<Employee> result = repository.findAll();
-        org.assertj.core.api.Assertions.assertThat(result.stream().count()).isEqualTo(0);
+        assertThat(result.stream().count()).isEqualTo(1);
     }
+
+  
 }
