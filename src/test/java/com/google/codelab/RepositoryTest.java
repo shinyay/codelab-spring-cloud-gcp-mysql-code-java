@@ -69,6 +69,12 @@ public class RepositoryTest {
     public void findAllEmployees() {
         List<Employee> result = repository.findAll();
         System.out.println("**************************************************");
+        result.stream()
+                .forEach(i -> {
+                    System.out.println(i.getEmployee_id());
+                    System.out.println(i.getName());
+                });
+        System.out.println("**************************************************");
         assertThat(result.stream().count()).isEqualTo(0);
     }
 
