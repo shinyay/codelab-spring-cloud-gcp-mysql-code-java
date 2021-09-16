@@ -58,4 +58,12 @@ public class RepositoryTest {
         );
     }
 
+    @Test
+    public void findEmployeesByDepartmentId() {
+        List<Employee> result = repository.findByDepId(100L);
+        assertAll(
+                () -> assertThat(result.get(0).getName()).isEqualTo("shinyay"),
+                () -> assertThat(result.get(0).getRole()).isEqualTo("Tester")
+        );
+    }
 }
