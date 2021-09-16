@@ -66,15 +66,21 @@ public class RepositoryTest {
 
     @Test
     @Order(1)
-    public void findAllEmployees() {
+    public void given_employee_when_findAll_then_countInitialValue() {
+        // Given, When
         List<Employee> result = repository.findAll();
         System.out.println("**************************************************");
+        System.out.println("[Test Case] findAllEmployees()");
         result.stream()
                 .forEach(i -> {
-                    System.out.println(i.getEmployee_id());
-                    System.out.println(i.getName());
+                    System.out.println("[Employee ID]   " + i.getEmployee_id());
+                    System.out.println("[Employee NAME] " + i.getName());
+                    System.out.println("[Employee ROLE] " + i.getRole());
+                    System.out.println("[Department ID] " + i.getDepartment_id());
                 });
         System.out.println("**************************************************");
+
+        // Then
         assertThat(result.stream().count()).isEqualTo(0);
     }
 
