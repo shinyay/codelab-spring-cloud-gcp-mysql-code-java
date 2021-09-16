@@ -2,10 +2,6 @@ package com.google.codelab;
 
 import com.google.codelab.entity.Employee;
 import com.google.codelab.repository.EmployeeRepository;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +13,6 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
