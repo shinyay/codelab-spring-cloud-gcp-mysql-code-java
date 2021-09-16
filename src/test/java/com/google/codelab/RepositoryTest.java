@@ -67,7 +67,10 @@ public class RepositoryTest {
     @Test
     @Order(1)
     public void given_employee_when_findAll_then_countInitialValue() {
-        // Given, When
+        // Given
+        //  V5__Insert_Employee.sql
+
+        // When
         List<Employee> result = repository.findAll();
         System.out.println("**************************************************");
         System.out.println("[Test Case] findAllEmployees()");
