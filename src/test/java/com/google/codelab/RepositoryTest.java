@@ -2,6 +2,10 @@ package com.google.codelab;
 
 import com.google.codelab.entity.Employee;
 import com.google.codelab.repository.EmployeeRepository;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,9 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,11 +31,26 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class RepositoryTest {
 
+//    private final PrintStream standardOut = System.out;
+//    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//
+//    @Before
+//    public void setUpStream() {
+//        System.setOut(new PrintStream(outputStream));
+//    }
+//
+//    @After
+//    public void restoreStream() {
+//        System.setOut(standardOut);
+//    }
+
+
     @Autowired
     private EmployeeRepository repository;
 
     @Container
     private static final MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:5.7.34")
+            .withStartupTimeout(Duration.ofSeconds(90)) // Default 60s Timeout
             .withDatabaseName("test-db")
             .withUsername("scott")
             .withPassword("tiger");
@@ -46,15 +68,16 @@ public class RepositoryTest {
     @Order(1)
     public void findAllEmployees() {
         List<Employee> result = repository.findAll();
-        assertThat(result.stream().count()).isEqualTo(1);
+        System.out.println("**************************************************");
+        assertThat(result.stream().count()).isEqualTo(0);
     }
 
     @Test
     public void findEmployees() {
         Optional<Employee> result = repository.findById(1L);
         assertAll(
-                () -> assertThat(result.get().getName()).isEqualTo("shinyay"),
-                () -> assertThat(result.get().getRole()).isEqualTo("Tester")
+                () -> assertThat(result.orElseThrow().getName()).isEqualTo("shinyay"),
+                () -> assertThat(result.orElseThrow().getRole()).isEqualTo("Tester")
         );
     }
 
