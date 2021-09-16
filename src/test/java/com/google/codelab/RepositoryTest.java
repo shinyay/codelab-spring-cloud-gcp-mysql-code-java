@@ -49,5 +49,13 @@ public class RepositoryTest {
         assertThat(result.stream().count()).isEqualTo(1);
     }
 
-  
+    @Test
+    public void findEmployees() {
+        Optional<Employee> result = repository.findById(1L);
+        assertAll(
+                () -> assertThat(result.get().getName()).isEqualTo("shinyay"),
+                () -> assertThat(result.get().getRole()).isEqualTo("Tester")
+        );
+    }
+
 }
