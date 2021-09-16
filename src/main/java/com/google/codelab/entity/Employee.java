@@ -14,7 +14,8 @@ public class Employee {
 
     private String role;
 
-    private Long department_id;
+    @Column(name = "department_id")
+    private Long depId;
 
     public String getName() {
         return name;
@@ -41,10 +42,10 @@ public class Employee {
     }
 
     public Long getDepartment_id() {
-        return department_id;
+        return depId;
     }
 
     public void setDepartment_id(Long department_id) {
-        this.department_id = department_id;
+        this.depId = department_id;
     }
 }
