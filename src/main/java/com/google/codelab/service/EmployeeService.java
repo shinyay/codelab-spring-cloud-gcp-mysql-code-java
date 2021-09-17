@@ -20,8 +20,12 @@ public class EmployeeService {
         return repository.findAll();
     }
 
-    public List<Employee> findEmployeeByDepartmentId(Long employeeId) {
-        return repository.findByDepId(employeeId);
+    public Optional<Employee> findEmployeeByEmployeeId(Long employeeId) {
+        return repository.findById(employeeId);
+    }
+
+    public List<Employee> findEmployeeByDepartmentId(Long departmentId) {
+        return repository.findByDepId(departmentId);
     }
 
     public Employee registerEmployee(Employee employee) {
