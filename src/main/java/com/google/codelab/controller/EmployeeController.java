@@ -31,5 +31,15 @@ public class EmployeeController {
         }
     }
 
-
+    @GetMapping("/employee/department/{department_id}")
+    public ResponseEntity<List<Employee>> findOneEmployeeById(@PathVariable("department_id") Long id) {
+        var employee = service.findEmployeeByDepartmentId(id);
+        if(employee.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity(employee, HttpStatus.OK);
+        }
+    }
+    
+    @GetMapping("/e")
 }
