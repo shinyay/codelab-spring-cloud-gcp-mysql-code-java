@@ -2,6 +2,8 @@ package com.google.codelab;
 
 import com.google.codelab.entity.Employee;
 import com.google.codelab.repository.EmployeeRepository;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
@@ -25,18 +29,18 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class RepositoryTest {
 
-//    private final PrintStream standardOut = System.out;
-//    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//
-//    @Before
-//    public void setUpStream() {
-//        System.setOut(new PrintStream(outputStream));
-//    }
-//
-//    @After
-//    public void restoreStream() {
-//        System.setOut(standardOut);
-//    }
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStream() {
+        System.setOut(new PrintStream(outputStream));
+    }
+
+    @After
+    public void restoreStream() {
+        System.setOut(standardOut);
+    }
 
 
     @Autowired
@@ -60,7 +64,7 @@ public class RepositoryTest {
 
     @Test
     @Order(1)
-    public void given_employee_when_findAll_then_countInitialValue() {
+    public void Given_employee_When_findAll_Then_countInitialValue() {
         // Given
         //  V5__Insert_Employee.sql
 
@@ -78,12 +82,18 @@ public class RepositoryTest {
         System.out.println("**************************************************");
 
         // Then
-        assertThat(result.stream().count()).isEqualTo(0);
+        assertThat(result.stream().count()).isEqualTo(1);
     }
 
     @Test
-    public void findEmployees() {
+    public void Given_employee_When_find_by_id_Then_querySpecificEmployee() {
+        // Given
+        //  V5__Insert_Employee.sql
+
+        // When
         Optional<Employee> result = repository.findById(1L);
+
+        // Then
         assertAll(
                 () -> assertThat(result.orElseThrow().getName()).isEqualTo("shinyay"),
                 () -> assertThat(result.orElseThrow().getRole()).isEqualTo("Tester")
