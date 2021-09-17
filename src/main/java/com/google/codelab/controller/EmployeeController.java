@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -31,8 +32,18 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/employee/{employee_id}")
+    public ResponseEntity<Optional<Employee>> findOneEmployeeByEmployeeId(@PathVariable("empployee_id") Long id) {
+        var employee = service.findEmployeeByEmployeeId(id);
+        if(employee.isPresent()) {
+            return new ResponseEntity(employee, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/employee/department/{department_id}")
-    public ResponseEntity<List<Employee>> findOneEmployeeById(@PathVariable("department_id") Long id) {
+    public ResponseEntity<List<Employee>> findEmployeesByDepartmentId(@PathVariable("department_id") Long id) {
         var employee = service.findEmployeeByDepartmentId(id);
         if(employee.isEmpty()) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -40,6 +51,5 @@ public class EmployeeController {
             return new ResponseEntity(employee, HttpStatus.OK);
         }
     }
-    
-    @GetMapping("/e")
+
 }
