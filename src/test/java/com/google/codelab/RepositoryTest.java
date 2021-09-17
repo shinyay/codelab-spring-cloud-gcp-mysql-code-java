@@ -101,8 +101,14 @@ public class RepositoryTest {
     }
 
     @Test
-    public void findEmployeesByDepartmentId() {
+    public void Given_employee_When_find_by_departmentId_Then_querySpecificEmployee() {
+        // Given
+        //  V5__Insert_Employee.sql
+
+        // When
         List<Employee> result = repository.findByDepId(100L);
+
+        // Then
         assertAll(
                 () -> assertThat(result.get(0).getName()).isEqualTo("shinyay"),
                 () -> assertThat(result.get(0).getRole()).isEqualTo("Tester")
