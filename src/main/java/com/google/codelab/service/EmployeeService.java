@@ -2,7 +2,6 @@ package com.google.codelab.service;
 
 import com.google.codelab.entity.Employee;
 import com.google.codelab.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,10 +29,10 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee) {
-        Optional<Employee> registeredEmployee = repository.findById(employee.getEmployee_id());
+        Optional<Employee> registeredEmployee = repository.findById(employee.getEmpId());
         if(registeredEmployee.isPresent()) {
             var registeredEmployeeEntity = registeredEmployee.get();
-            registeredEmployeeEntity.setEmployee_id(employee.getEmployee_id());
+            registeredEmployeeEntity.setEmpId(employee.getEmpId());
             registeredEmployeeEntity.setName(employee.getName());
             registeredEmployeeEntity.setRole(employee.getRole());
             registeredEmployeeEntity.setDepartment_id(employee.getDepartment_id());
