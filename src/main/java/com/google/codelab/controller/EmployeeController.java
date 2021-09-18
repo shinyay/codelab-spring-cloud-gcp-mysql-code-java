@@ -68,4 +68,14 @@ public class EmployeeController {
             return new ResponseEntity(HttpStatus.OK);
         }
     }
+
+    @DeleteMapping("/employees/{employee_id}")
+    public ResponseEntity<Void> deleteEmployeeByEmployeeId(@PathVariable("employee_id") Long id) {
+        if(service.findEmployeeByEmployeeId(id).isPresent()) {
+            service.deleteEmployeeByEmployeeId(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 }
