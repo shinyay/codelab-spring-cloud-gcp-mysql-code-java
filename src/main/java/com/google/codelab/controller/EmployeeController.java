@@ -33,7 +33,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/{employee_id}")
-    public ResponseEntity<Optional<Employee>> findOneEmployeeByEmployeeId(@PathVariable("empployee_id") Long id) {
+    public ResponseEntity<Optional<Employee>> findOneEmployeeByEmployeeId(@PathVariable("employee_id") Long id) {
         var employee = service.findEmployeeByEmployeeId(id);
         if(employee.isPresent()) {
             return new ResponseEntity(employee, HttpStatus.OK);
@@ -51,5 +51,7 @@ public class EmployeeController {
             return new ResponseEntity(employee, HttpStatus.OK);
         }
     }
+
+
 
 }
