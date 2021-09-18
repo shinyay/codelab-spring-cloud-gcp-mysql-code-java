@@ -59,7 +59,13 @@ public class EmployeeController {
         return new ResponseEntity(service.updateEmployee(employee), HttpStatus.OK);
     }
 
-    
-
-
+    @DeleteMapping("/employees")
+    public ResponseEntity<Void> deleteAllEmployees() {
+        if(service.findAllEmployees().isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } else {
+            service.deleteAllEmployees();
+            return new ResponseEntity(HttpStatus.OK);
+        }
+    }
 }
