@@ -4,10 +4,7 @@ import com.google.codelab.entity.Employee;
 import com.google.codelab.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +29,7 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/employee/{employee_id}")
+    @GetMapping("/employees/{employee_id}")
     public ResponseEntity<Optional<Employee>> findOneEmployeeByEmployeeId(@PathVariable("employee_id") Long id) {
         var employee = service.findEmployeeByEmployeeId(id);
         if(employee.isPresent()) {
@@ -42,7 +39,7 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/employee/department/{department_id}")
+    @GetMapping("/employees/department/{department_id}")
     public ResponseEntity<List<Employee>> findEmployeesByDepartmentId(@PathVariable("department_id") Long id) {
         var employee = service.findEmployeeByDepartmentId(id);
         if(employee.isEmpty()) {
@@ -52,6 +49,10 @@ public class EmployeeController {
         }
     }
 
+    @PostMapping("/employees")
+    public ResponseEntity<Employee> addNewEmployee(@RequestBody Employee employee) {
+        return new ResponseEntity(service.registerEmployee(employee), HttpStatus.OK);
+    }
 
 
 }
