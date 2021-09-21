@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -29,21 +30,21 @@ public class WebLayerTest {
     @MockBean
     private EmployeeService service;
 
+    private Employee employeeData;
     private List<Employee> employeeList;
 
     @BeforeAll
     public void init() {
-        Employee sample = new Employee();
-        sample.setEmpId(999L);
-        sample.setDepartment_id(10L);
-        sample.setName("JoneDoe");
-        sample.setRole("User");
-        employeeList = Arrays.asList(sample);
+        employeeData = new Employee();
+        employeeData.setEmpId(999L);
+        employeeData.setDepartment_id(10L);
+        employeeData.setName("JoneDoe");
+        employeeData.setRole("User");
+        employeeList = Arrays.asList(employeeData);
     }
 
     @Test
     public void Given_EmployeeController_When_findAllEmployees_Then_return_200() throws Exception {
-
 
         Mockito.when(service.findAllEmployees()).thenReturn(employeeList);
 
@@ -51,4 +52,17 @@ public class WebLayerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void Given_EmployeeController_When_findEmployeeByEmployeeId_Then_return_200() throws Exception {
+
+        Mockito.when(service.findEmployeeByEmployeeId(999L)).thenReturn(Optional.of(employeeData));
+
+        mockMvc.perform(get("/api/v1/employees/999"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+
+
 }
