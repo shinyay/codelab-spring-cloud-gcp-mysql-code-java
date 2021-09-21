@@ -75,6 +75,20 @@ public class WebLayerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void Given_EmployeeController_When_addNewEmployee_Then_return_201() throws Exception {
 
+        var json = mapper.writeValueAsString(employeeData);
+
+        Mockito.when(service.registerEmployee(employeeData)).thenReturn(employeeData);
+
+        mockMvc.perform(
+                post("/api/v1/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated());
+    }
 
 }
