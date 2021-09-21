@@ -86,9 +86,11 @@ public class WebLayerTest {
                 post("/api/v1/employees")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
+
 
 }
