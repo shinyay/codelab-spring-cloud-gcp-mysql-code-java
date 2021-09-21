@@ -106,4 +106,14 @@ public class WebLayerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void Given_EmployeeController_When_deleteAllEmployees_Then_return_200() throws Exception {
+
+        Mockito.doNothing().when(service).deleteAllEmployees();
+
+        mockMvc.perform(delete("/api/v1/employees"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
 }
