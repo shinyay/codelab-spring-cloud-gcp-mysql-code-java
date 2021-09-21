@@ -5,6 +5,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employee")
 public class Employee {
+    public Employee(Long empId, String name, String role, Long depId) {
+        this.empId = empId;
+        this.name = name;
+        this.role = role;
+        this.depId = depId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
