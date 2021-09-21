@@ -1,5 +1,6 @@
 package com.google.codelab;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.codelab.controller.EmployeeController;
 import com.google.codelab.entity.Employee;
 import com.google.codelab.service.EmployeeService;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,16 +33,15 @@ public class WebLayerTest {
     @MockBean
     private EmployeeService service;
 
+    @Autowired
+    private ObjectMapper mapper;
+
     private Employee employeeData;
     private List<Employee> employeeList;
 
     @BeforeAll
     public void init() {
-        employeeData = new Employee();
-        employeeData.setEmpId(999L);
-        employeeData.setDepartment_id(10L);
-        employeeData.setName("JoneDoe");
-        employeeData.setRole("User");
+        employeeData = new Employee(999L, "JoneDoe", "User", 10L);
         employeeList = Arrays.asList(employeeData);
     }
 
@@ -59,6 +61,16 @@ public class WebLayerTest {
         Mockito.when(service.findEmployeeByEmployeeId(999L)).thenReturn(Optional.of(employeeData));
 
         mockMvc.perform(get("/api/v1/employees/999"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void Given_EmployeeController_When_findEmployeeByDepartmentId_Then_return_200() throws Exception {
+
+        Mockito.when(service.findEmployeeByEmployeeId(10L)).thenReturn(Optional.of(employeeData));
+
+        mockMvc.perform(get("/api/v1/employees/10"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
