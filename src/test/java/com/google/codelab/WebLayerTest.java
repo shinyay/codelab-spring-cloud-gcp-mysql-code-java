@@ -18,8 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -92,5 +91,19 @@ public class WebLayerTest {
                 .andExpect(status().isCreated());
     }
 
+    @Test
+    public void Given_EmployeeController_When_updateEmployee_Then_return_200() throws Exception {
 
+        var json = mapper.writeValueAsString(employeeData);
+
+        Mockito.when(service.updateEmployee(employeeData)).thenReturn(employeeData);
+
+        mockMvc.perform(
+                        put("/api/v1/employees")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json)
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }
