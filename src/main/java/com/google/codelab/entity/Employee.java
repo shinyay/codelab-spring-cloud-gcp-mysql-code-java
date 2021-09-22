@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employee")
 public class Employee {
+    public Employee() {}
+
     public Employee(Long empId, String name, String role, Long depId) {
         this.empId = empId;
         this.name = name;
@@ -24,6 +26,8 @@ public class Employee {
 
     @Column(name = "department_id")
     private Long depId;
+
+
 
     public String getName() {
         return name;
