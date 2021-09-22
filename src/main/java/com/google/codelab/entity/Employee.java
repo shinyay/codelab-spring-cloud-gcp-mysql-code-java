@@ -45,19 +45,19 @@ public class Employee {
         this.role = role;
     }
 
-    public void setEmpId(Long employee_id) {
+    public void setEmployeeId(Long employee_id) {
         this.empId = employee_id;
     }
 
-    public Long getEmpId() {
+    public Long getEmployeeId() {
         return empId;
     }
 
-    public Long getDepartment_id() {
+    public Long getDepartmentId() {
         return depId;
     }
 
-    public void setDepartment_id(Long department_id) {
+    public void setDepartmentId(Long department_id) {
         this.depId = department_id;
     }
 }
