@@ -74,10 +74,10 @@ public class RepositoryTest {
         System.out.println("[Test Case] findAllEmployees()");
         result.stream()
                 .forEach(i -> {
-                    System.out.println("[Employee ID]   " + i.getEmpId());
+                    System.out.println("[Employee ID]   " + i.getEmployeeId());
                     System.out.println("[Employee NAME] " + i.getName());
                     System.out.println("[Employee ROLE] " + i.getRole());
-                    System.out.println("[Department ID] " + i.getDepartment_id());
+                    System.out.println("[Department ID] " + i.getDepartmentId());
                 });
         System.out.println("**************************************************");
 
