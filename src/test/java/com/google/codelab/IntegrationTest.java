@@ -67,5 +67,14 @@ public class IntegrationTest {
     }
 
 
+    @Test
+    public void Given_Integration_When_findOneEmployeeByEmployeeId_Then_return_employee() throws Exception {
 
+        mockMvc.perform(get("/api/v1/employees/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("shinyay"))
+                .andExpect(jsonPath("$.role").value("Tester"))
+                .andExpect(jsonPath("$.departmentId").value(100));
+    }
 }
