@@ -55,4 +55,17 @@ public class IntegrationTest {
                 .andExpect(jsonPath("$[0].role").exists())
                 .andExpect(jsonPath("$[0].departmentId").exists());
     }
+
+    @Test
+    public void Given_Integration_When_findAllEmployees_Then_return_employee_name() throws Exception {
+
+        mockMvc.perform(get("/api/v1/employees"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].name").value("shinyay"));
+    }
+
+
+
 }
