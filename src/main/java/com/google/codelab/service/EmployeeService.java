@@ -33,13 +33,13 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee) {
-        Optional<Employee> registeredEmployee = repository.findById(employee.getEmpId());
+        Optional<Employee> registeredEmployee = repository.findById(employee.getEmployeeId());
         if(registeredEmployee.isPresent()) {
             var registeredEmployeeEntity = registeredEmployee.get();
-            registeredEmployeeEntity.setEmpId(employee.getEmpId());
+            registeredEmployeeEntity.setEmployeeId(employee.getEmployeeId());
             registeredEmployeeEntity.setName(employee.getName());
             registeredEmployeeEntity.setRole(employee.getRole());
-            registeredEmployeeEntity.setDepartment_id(employee.getDepartment_id());
+            registeredEmployeeEntity.setDepartmentId(employee.getDepartmentId());
             return repository.save(registeredEmployeeEntity);
         } else {
             return repository.save(employee);
