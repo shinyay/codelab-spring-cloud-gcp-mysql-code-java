@@ -36,7 +36,6 @@ public class EmployeeService {
         Optional<Employee> registeredEmployee = repository.findById(employee.getEmployeeId());
         if(registeredEmployee.isPresent()) {
             var registeredEmployeeEntity = registeredEmployee.get();
-            registeredEmployeeEntity.setEmployeeId(employee.getEmployeeId());
             registeredEmployeeEntity.setName(employee.getName());
             registeredEmployeeEntity.setRole(employee.getRole());
             registeredEmployeeEntity.setDepartmentId(employee.getDepartmentId());
