@@ -1,0 +1,7 @@
+INSERT INTO department VALUES (10, 'ACCOUNTING');
+INSERT INTO department VALUES (20, 'RESEARCH');
+INSERT INTO department VALUES (30, 'SALES');
+INSERT INTO department VALUES (40, 'OPERATIONS');
+INSERT INTO department VALUES (50, 'MARKETING');
+INSERT INTO department VALUES (100, 'ENGINEERING');
+INSERT INTO employee VALUES (1, 100, 'shinyay', 'Tester');
