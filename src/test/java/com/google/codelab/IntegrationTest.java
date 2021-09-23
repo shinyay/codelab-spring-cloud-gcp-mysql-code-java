@@ -171,7 +171,19 @@ public class IntegrationTest {
 
     @Test
     @Order(8)
-    public void Given_Integration_When_deleteAllEmployees_Then_return_employee_name() throws Exception {
+    public void Given_Integration_When_deleteEmployeeByEmployeeId_Then_return_employee_name() throws Exception {
+
+        mockMvc.perform(delete("/api/v1/employees/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/v1/employees/1"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Order(9)
+    public void Given_Integration_When_deleteAllEmployees_Then_return_204() throws Exception {
 
         mockMvc.perform(delete("/api/v1/employees"))
                 .andDo(print())
