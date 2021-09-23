@@ -33,6 +33,13 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
+  sql:
+    init:
+      mode: embedded
+      platform: mysql
+      encoding: UTF-8
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
 ---
 spring:
   config:
