@@ -33,6 +33,8 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
+  flyway:
+    enabled: false
   sql:
     init:
       mode: always
