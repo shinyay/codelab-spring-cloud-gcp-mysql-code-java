@@ -80,6 +80,7 @@ public class IntegrationTest {
 
 
     @Test
+    @Order(3)
     public void Given_Integration_When_findOneEmployeeByEmployeeId_Then_return_employee() throws Exception {
 
         mockMvc.perform(get("/api/v1/employees/1"))
@@ -91,6 +92,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @Order(4)
     public void Given_Integration_When_findEmployeesByDepartmentId_Then_return_employee() throws Exception {
 
         mockMvc.perform(get("/api/v1/employees/department/100"))
@@ -102,7 +104,7 @@ public class IntegrationTest {
     }
 
     @Test
-    @Order(3)
+    @Order(5)
     public void Given_Integration_When_addNewEmployee_Then_return_employee() throws Exception {
 
         var employee = new Employee();
@@ -126,7 +128,27 @@ public class IntegrationTest {
     }
 
     @Test
-    @Order(4)
+    @Order(6)
+    public void Given_Integration_When_updateEmployee_Then_return_employee() throws Exception {
+
+        var employee = new Employee(1L, "shinyay", "Youtuber", 100L);
+        var json = objectMapper.writeValueAsString(employee);
+
+        mockMvc.perform(put("/api/v1/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/v1/employees/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.role").value("Youtuber"))
+                .andExpect(jsonPath("$.departmentId").value(100));
+    }
+
+    @Test
+    @Order(7)
     public void Given_Integration_When_updateEmployee_Then_return_new_employee() throws Exception {
 
         var employee = new Employee(3L, "shinya", "Youtuber", 100L);
@@ -146,4 +168,7 @@ public class IntegrationTest {
                 .andExpect(jsonPath("$.role").value("Youtuber"))
                 .andExpect(jsonPath("$.departmentId").value(100));
     }
+
+
+
 }
