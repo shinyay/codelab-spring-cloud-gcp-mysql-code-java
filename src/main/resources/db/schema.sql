@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS department;
 CREATE TABLE department
 (
@@ -10,6 +11,7 @@ DROP TABLE IF EXISTS employee;
 CREATE TABLE employee
 (
     employee_id   integer     NOT NULL AUTO_INCREMENT,
+    department_id integer NOT NULL,
     employee_name varchar(64) NOT NULL UNIQUE,
     role          varchar(32) DEFAULT NULL,
     PRIMARY KEY (employee_id)
@@ -17,3 +19,4 @@ CREATE TABLE employee
 
 ALTER TABLE employee
     ADD FOREIGN KEY (department_id) REFERENCES department (department_id);
+SET FOREIGN_KEY_CHECKS = 1;
