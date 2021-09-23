@@ -126,9 +126,10 @@ public class IntegrationTest {
     }
 
     @Test
-    public void Given_Integration_When_updateEmployee_Then_return_employee() throws Exception {
+    @Order(4)
+    public void Given_Integration_When_updateEmployee_Then_return_new_employee() throws Exception {
 
-        var employee = new Employee(1L, "shinyay", "Youtuber", 100L);
+        var employee = new Employee(3L, "shinya", "Youtuber", 100L);
         var json = objectMapper.writeValueAsString(employee);
 
         mockMvc.perform(put("/api/v1/employees")
@@ -137,9 +138,11 @@ public class IntegrationTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
-        mockMvc.perform(get("/api/v1/employees/1"))
+        mockMvc.perform(get("/api/v1/employees/3"))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.employeeId").value("3"))
+                .andExpect(jsonPath("$.name").value("shinya"))
                 .andExpect(jsonPath("$.role").value("Youtuber"))
                 .andExpect(jsonPath("$.departmentId").value(100));
     }
