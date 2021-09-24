@@ -1,4 +1,10 @@
 package com.google.codelab.repository;
 
-public interface EmployeeRepository {
+import com.google.codelab.entity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    List<Employee> findByDepId(long l);
 }
