@@ -3,6 +3,12 @@
 This is a tutorial project with Test Codes.
 
 ## Description
+### Branches
+#### main
+This branch shows the completed application codes.
+
+#### tutorial
+This branch shows the skeleton classes which you will complement with test codes.
 
 ## Demo
 
