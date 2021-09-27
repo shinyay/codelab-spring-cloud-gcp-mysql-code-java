@@ -11,8 +11,7 @@ public class Employee {
         this.role = role;
         this.depId = depId;
     }
-
-    @Id
+    
     private Long empId;
 
     private String name;
