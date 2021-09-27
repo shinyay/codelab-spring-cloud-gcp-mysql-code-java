@@ -67,9 +67,9 @@ public class WebLayerTest {
     @Test
     public void Given_EmployeeController_When_findEmployeeByDepartmentId_Then_return_200() throws Exception {
 
-        Mockito.when(service.findEmployeeByEmployeeId(10L)).thenReturn(Optional.of(employeeData));
+        Mockito.when(service.findEmployeeByDepartmentId(10L)).thenReturn(employeeList);
 
-        mockMvc.perform(get("/api/v1/employees/10"))
+        mockMvc.perform(get("/api/v1/employees/department/10"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
