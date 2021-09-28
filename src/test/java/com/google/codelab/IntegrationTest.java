@@ -171,7 +171,7 @@ public class IntegrationTest {
 
     @Test
     @Order(8)
-    public void Given_Integration_When_deleteEmployeeByEmployeeId_Then_return_employee_name() throws Exception {
+    public void Given_Integration_When_deleteEmployeeByEmployeeId_Then_return_404() throws Exception {
 
         mockMvc.perform(delete("/api/v1/employees/1"))
                 .andDo(print())
